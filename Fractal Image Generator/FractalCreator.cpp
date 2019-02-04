@@ -63,6 +63,9 @@ namespace frctl
 
 	void FractalCreator::calculateIteration()
 	{
+		omp_set_dynamic(0);
+		omp_set_num_threads(omp_get_num_procs());
+		#pragma omp parallel for
 		for (int y = 0; y < m_height; y++)
 		{
 			for (int x = 0; x < m_width; x++)
@@ -89,7 +92,9 @@ namespace frctl
 	void FractalCreator::calculateRangeTotals()
 	{
 		int rangeIndex = 0;
-
+		omp_set_dynamic(0);
+		omp_set_num_threads(omp_get_num_procs());
+		#pragma omp parallel for
 		for (int i = 0; i < frctl::Mandelbrot::MAX_ITERATIONS; i++)
 		{
 			int pixels = m_histogram[i];
@@ -113,8 +118,10 @@ namespace frctl
 
 	void FractalCreator::drawFractal()
 	{
-
+		omp_set_dynamic(0);
+		omp_set_num_threads(omp_get_num_procs());
 		//Drawing loop
+		#pragma omp parallel for
 		for (int y = 0; y < m_height; y++)
 		{
 			for (int x = 0; x < m_width; x++)

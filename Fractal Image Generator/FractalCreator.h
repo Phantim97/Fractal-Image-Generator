@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <omp.h>
 #include "Zoom.h"
 #include "ZoomList.h"
 #include "Mandelbrot.h"

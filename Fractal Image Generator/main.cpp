@@ -25,8 +25,8 @@ int main()
 		fractalCreator.addRange(0.0, frctl::RGB(0, 0, 0));
 		//fractalCreator.addRange(0.05, frctl::RGB(0, 0, 255));
 		//fractalCreator.addRange(0.2, frctl::RGB(0, 255, 255));
-		//fractalCreator.addRange(0.3, frctl::RGB(137, 137, 0));
-		fractalCreator.addRange(1.0, frctl::RGB(255, 71, 0));
+		fractalCreator.addRange(0.3, frctl::RGB(137, 137, 0));
+		fractalCreator.addRange(1.0, frctl::RGB(255, 0, 0));
 
 		system("cls");
 		std::cout << "Zooming into correct coordinates...\n";
@@ -34,14 +34,14 @@ int main()
 		//add zooms to a point on the Fractal Image
 
 		//Zone 1:
-		fractalCreator.addZoom(frctl::Zoom(295, 202, 0.1));
-		fractalCreator.addZoom(frctl::Zoom(312, 304, 0.1));
-		fractalCreator.addZoom(frctl::Zoom(581, 357, 0.1));
-		fractalCreator.addZoom(frctl::Zoom(381, 285, 0.1));
+		//fractalCreator.addZoom(frctl::Zoom(295, 202, 0.1));
+		//fractalCreator.addZoom(frctl::Zoom(312, 304, 0.1));
+		//fractalCreator.addZoom(frctl::Zoom(581, 357, 0.1));
+		//fractalCreator.addZoom(frctl::Zoom(381, 285, 0.1));
 		//fractalCreator.addZoom(frctl::Zoom(210, 210, 0.1));
 
 		//Zone 2:
-		//fractalCreator.addZoom(frctl::Zoom(452, 300, 0.1));
+		fractalCreator.addZoom(frctl::Zoom(452, 300, 0.1));
 	}
 	system("cls");
 	std::cout << "Rendering image...\n";
@@ -50,7 +50,7 @@ int main()
 
 	system("cls");
 	std::cout << "Finished.\n";
-
 	system("pause");
+	system("test.bmp");
 	return 0;
 }
