@@ -6,3 +6,5 @@ Features are limited in current state, planning to add:
 [ ] Multiple zoom/ color presets
 [ ] Manual input of rgb values and zoom features
 [ ] Manual adjustment of fractal image in runtime
+[ ] SSE Optimization
+[ ] CUDA Optimization
