@@ -10,7 +10,8 @@ int main()
 
 	int modeSelect;
 	std::cout << "Select an option 1) Presets. 2) Test : ";
-	do {
+	do
+	{
 		std::cin >> modeSelect;
 	} while (modeSelect != 1 && modeSelect != 2);
 

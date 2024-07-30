@@ -63,8 +63,11 @@ namespace frctl
 
 	void FractalCreator::calculateIteration()
 	{
+		#ifdef _OPENMP
 		omp_set_dynamic(0);
 		omp_set_num_threads(omp_get_num_procs());
+		#endif
+
 		#pragma omp parallel for
 		for (int y = 0; y < m_height; y++)
 		{
@@ -72,7 +75,7 @@ namespace frctl
 			{
 				std::pair<double, double> coords = m_zoomList.doZoom(x, y);
 				//we need a symetrical midpoint, range is from -1 to +1 
-				//double xFractal = (x - WIDTH/2 -200 ) * 2.0/HEIGHT; //2.0 used to cast to a double 
+				//double xFractal = (x - WIDTH/2 -200 ) * 2.0/HEIGHT; //2.0 used to implicit cast
 				//double yFractal = (y - HEIGHT/2) * 2.0/HEIGHT; //scaling 
 
 				int iterations = frctl::Mandelbrot::getIterations(coords.first, coords.second);
@@ -92,8 +95,10 @@ namespace frctl
 	void FractalCreator::calculateRangeTotals()
 	{
 		int rangeIndex = 0;
+		#ifdef _OPENMP
 		omp_set_dynamic(0);
 		omp_set_num_threads(omp_get_num_procs());
+		#endif
 		#pragma omp parallel for
 		for (int i = 0; i < frctl::Mandelbrot::MAX_ITERATIONS; i++)
 		{
@@ -118,8 +123,10 @@ namespace frctl
 
 	void FractalCreator::drawFractal()
 	{
+		#ifdef _OPENMP
 		omp_set_dynamic(0);
 		omp_set_num_threads(omp_get_num_procs());
+		#endif
 		//Drawing loop
 		#pragma omp parallel for
 		for (int y = 0; y < m_height; y++)
@@ -136,7 +143,7 @@ namespace frctl
 
 				RGB& startColor = m_colors[range];
 				RGB& endColor = m_colors[range + 1]; //range is 0 based and range is 0 to 1 (hue)
-				RGB& colorDiff = endColor - startColor;
+				RGB colorDiff = endColor - startColor;
 
 				uint8_t red = 0;
 				uint8_t green = 0;

@@ -5,7 +5,9 @@
 #include <string>
 #include <memory>
 #include <vector>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 #include "Zoom.h"
 #include "ZoomList.h"
 #include "Mandelbrot.h"
