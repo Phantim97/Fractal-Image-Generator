@@ -2,28 +2,27 @@
 
 namespace frctl
 {
-	ZoomList::ZoomList(int width, int height)
+	ZoomList::ZoomList(const int width, const int height)
 	{
-		this->m_height = height;
-		this->m_width = width;
+		height_ = height;
+		width_ = width;
 	}
 
 	void ZoomList::add(const Zoom& zoom)
 	{
-		zooms.push_back(zoom);
+		zooms_.push_back(zoom);
 
+		x_center_ += (zoom.x - width_ / 2) * scale_;
+		y_center_ += -(zoom.y - height_ / 2) * scale_; //- for GIMP coordinate system
 
-		m_xCenter += (zoom.x - m_width / 2) * m_scale;
-		m_yCenter += -(zoom.y - m_height / 2) * m_scale; //- for GIMP coordinate system
-
-		m_scale *= zoom.scale;
+		scale_ *= zoom.scale;
 	}
 
-	std::pair<double, double> ZoomList::do_zoom(int x, int y)
+	std::pair<double, double> ZoomList::do_zoom(const int x, const int y)
 	{
-		double xFractal = (x - m_width / 2) *m_scale + m_xCenter;
-		double yFractal = (y - m_height / 2) *m_scale + m_yCenter;
+		double x_fractal = (x - width_ / 2.0) * scale_ + x_center_;
+		double y_fractal = (y - height_ / 2.0) * scale_ + y_center_;
 
-		return std::pair<double, double>(xFractal, yFractal);
+		return {x_fractal, y_fractal};
 	}
 }

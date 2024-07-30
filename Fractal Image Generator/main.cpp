@@ -32,7 +32,7 @@ int main()
 		system("cls");
 		std::cout << "Zooming into correct coordinates...\n";
 
-		//add zooms to a point on the Fractal Image
+		//add zooms_ to a point on the Fractal Image
 
 		//Zone 1:
 		//fractal_creator.add_zoom(frctl::Zoom(295, 202, 0.1));

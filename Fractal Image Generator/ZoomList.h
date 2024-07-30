@@ -7,17 +7,16 @@
 
 namespace frctl
 {
-
 	class ZoomList
 	{
 	private:
-		double m_xCenter{ 0 };
-		double m_yCenter{ 0 };
-		double m_scale{ 1.0 };
+		double x_center_ = 0 ;
+		double y_center_ = 0;
+		double scale_ = 1.0;
 
-		int m_width{ 0 };
-		int m_height{ 0 };
-		std::vector<Zoom> zooms;
+		int width_ = 0;
+		int height_ = 0;
+		std::vector<Zoom> zooms_;
 	public:
 		ZoomList(int width, int height);
 

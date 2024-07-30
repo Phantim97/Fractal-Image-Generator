@@ -5,17 +5,16 @@ namespace frctl
 {
 	struct Zoom
 	{
-		int x;
-		int y;
-		double scale;
+		int x = 0;
+		int y = 0;
+		double scale = 0.0;
 
-		Zoom(int x, int y, double scale)
+		Zoom(const int x_coord, const int y_coord, const double scale_factor)
 		{
-			this->x = x;
-			this->y = y;
-			this->scale = scale;
+			x = x_coord;
+			y = y_coord;
+			scale = scale_factor;
 		}
-
 	};
 }
 
