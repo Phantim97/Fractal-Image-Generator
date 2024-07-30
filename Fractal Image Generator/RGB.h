@@ -1,6 +1,8 @@
-#pragma once
+#ifndef RGB_H
+#define RGB_H
 
-namespace frctl {
+namespace frctl
+{
 	struct RGB
 	{
 		double r;
@@ -13,3 +15,5 @@ namespace frctl {
 
 	RGB operator-(const RGB& first, const RGB& second);
 }
+
+#endif

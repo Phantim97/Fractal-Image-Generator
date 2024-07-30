@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOOM_H
+#define ZOOM_H
 
 namespace frctl
 {
@@ -17,3 +18,5 @@ namespace frctl
 
 	};
 }
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BITMAP_INFO_HEADER_H
+#define BITMAP_INFO_HEADER_H
 
 #include <cstdint>
 
@@ -22,3 +23,5 @@ namespace frctl
 }
 
 #pragma pack(pop)
+
+#endif

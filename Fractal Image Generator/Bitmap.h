@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BITMAP_H
+#define BITMAP_H
+
 #include <cstdint>
 #include <string>
 #include <memory>
@@ -20,3 +22,5 @@ namespace frctl
 		void setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t);
 	};
 }
+
+#endif

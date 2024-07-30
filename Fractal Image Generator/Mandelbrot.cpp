@@ -3,13 +3,6 @@
 
 namespace frctl
 {
-	Mandelbrot::Mandelbrot() {
-
-	}
-
-	Mandelbrot::~Mandelbrot()
-	{}
-
 	//Mandelbrot Algorithm here
 	int Mandelbrot::getIterations(double x, double y)
 	{

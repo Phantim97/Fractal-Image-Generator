@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOOM_LIST_H
+#define ZOOM_LIST_H
+
 #include "Zoom.h"
 #include <vector>
 #include <utility>
@@ -24,3 +26,5 @@ namespace frctl
 		std::pair<double, double> doZoom(int x, int y);
 	};
 }
+
+#endif
