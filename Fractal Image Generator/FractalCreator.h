@@ -20,33 +20,33 @@ namespace frctl
 	class FractalCreator
 	{
 	private:
-		int m_width{ 0 };
-		int m_height{ 0 };
-		int m_total{ 0 };
-		std::unique_ptr<int[]> m_histogram; // +1 to count 0
-		std::unique_ptr<int[]> m_fractal; //Store iterations
-		frctl::Bitmap m_bitmap;
-		frctl::ZoomList m_zoomList;
+		int width_ = 0;
+		int height_ = 0;
+		int total_ = 0;
+		std::unique_ptr<int[]> histogram_ = nullptr; // +1 to count 0
+		std::unique_ptr<int[]> fractal_ = nullptr; //Store iterations
+		frctl::Bitmap bitmap_;
+		frctl::ZoomList zoom_list_;
 
-		std::vector<int> m_ranges;
-		std::vector<RGB> m_colors;
-		std::vector<int> m_rangeTotals;
+		std::vector<int> ranges_;
+		std::vector<RGB> colors_;
+		std::vector<int> range_totals;
 
-		bool m_bGotFirstRange{ false };
+		bool got_first_range_ = false;
 
-		void calculateIteration();
-		void calculateTotalIterations();
-		void calculateRangeTotals();
-		void drawFractal();	
-		void writeBitmap(std::string name);
-		int getRange(int iterations) const;
+		void _calculate_iteration();
+		void _calculate_total_iterations();
+		void _calculate_range_totals();
+		void _draw_fractal();
+		void _write_bitmap(const std::string& name);
+		[[nodiscard]] int get_range(int iterations) const;
 
 	public:
-		FractalCreator(int width, int hieght);
-		~FractalCreator();
-		void addRange(double rangeEnd, const RGB& rgb);
-		void addZoom(const frctl::Zoom& zoom);
-		void run(std::string name);
+		FractalCreator(int width, int height);
+		~FractalCreator() = default;
+		void add_range(double range_end, const RGB& rgb);
+		void add_zoom(const frctl::Zoom& zoom);
+		void run(const std::string& name);
 	};
 }
 

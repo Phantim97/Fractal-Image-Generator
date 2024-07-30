@@ -23,7 +23,7 @@ namespace frctl
 
 		void add(const Zoom& zoom);
 
-		std::pair<double, double> doZoom(int x, int y);
+		std::pair<double, double> do_zoom(int x, int y);
 	};
 }
 

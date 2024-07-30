@@ -19,7 +19,7 @@ namespace frctl
 		m_scale *= zoom.scale;
 	}
 
-	std::pair<double, double> ZoomList::doZoom(int x, int y)
+	std::pair<double, double> ZoomList::do_zoom(int x, int y)
 	{
 		double xFractal = (x - m_width / 2) *m_scale + m_xCenter;
 		double yFractal = (y - m_height / 2) *m_scale + m_yCenter;
