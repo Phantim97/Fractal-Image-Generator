@@ -13,16 +13,16 @@ namespace frctl
 
 	bool Bitmap::write(const std::string& filename)
 	{
-		frctl::BitmapFileHeader fileHeader; 
-		frctl::BitmapInfoHeader infoHeader;
+		frctl::BitmapFileHeader file_header;
+		frctl::BitmapInfoHeader info_header;
 
 		//File header contains info about file (needs to take size of everything)
-		fileHeader.file_size = sizeof(frctl::BitmapFileHeader) + sizeof(frctl::BitmapInfoHeader) + width_ * height_ * 3;
-		fileHeader.data_offset = sizeof(frctl::BitmapFileHeader) + sizeof(frctl::BitmapInfoHeader); //starts where pixels do and where info ends
+		file_header.file_size = sizeof(frctl::BitmapFileHeader) + sizeof(frctl::BitmapInfoHeader) + width_ * height_ * 3;
+		file_header.data_offset = sizeof(frctl::BitmapFileHeader) + sizeof(frctl::BitmapInfoHeader); //starts where pixels do and where info ends
 
 		//Info contains info about the bitmap
-		infoHeader.width = width_;
-		infoHeader.height = height_;
+		info_header.width = width_;
+		info_header.height = height_;
 
 		//Creating a binary file
 		std::ofstream file;
@@ -34,8 +34,8 @@ namespace frctl
 		}
 
 		//writes to file with a char pointer with also the size of that buffer
-		file.write((char *)&fileHeader, sizeof(fileHeader));
-		file.write((char *)&infoHeader, sizeof(infoHeader));
+		file.write((char *)&file_header, sizeof(file_header));
+		file.write((char *)&info_header, sizeof(info_header));
 		file.write((char *)pixels_.get(), width_ * height_ * 3); //.get() to obtain a raw pointer
 
 		file.close();
@@ -59,7 +59,5 @@ namespace frctl
 		pixel[0] = blue;
 		pixel[1] = green;
 		pixel[2] = red;
-		
 	}
-
 }

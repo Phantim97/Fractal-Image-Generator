@@ -26,8 +26,8 @@ namespace frctl
 	}
 
 	FractalCreator::FractalCreator(const int width, const int height) : width_(width), height_(height),
-	                                                        histogram_(new int[frctl::Mandelbrot::MAX_ITERATIONS]{0 }),
-	                                                        fractal_(new int[width_ * height_]{0 }), bitmap_(width_, height_), zoom_list_(width_, height_)
+	     histogram_(new int[frctl::Mandelbrot::MAX_ITERATIONS]{0 }), fractal_(new int[width_ * height_]{0 }),
+		 bitmap_(width_, height_), zoom_list_(width_, height_)
 	{
 		add_zoom(frctl::Zoom(width_ / 2, height_ / 2, 4.0 / width_)); //initial zoom
 	}
@@ -47,6 +47,7 @@ namespace frctl
 		}
 
 		range--;
+
 		//bounds checking
 		assert(range > -1);
 		assert(range < ranges_.size());
@@ -67,15 +68,12 @@ namespace frctl
 			for (int x = 0; x < width_; x++)
 			{
 				std::pair<double, double> coords = zoom_list_.do_zoom(x, y);
-				//we need a symetrical midpoint, range is from -1 to +1 
-				//double xFractal = (x - WIDTH/2 -200 ) * 2.0/HEIGHT; //2.0 used to implicit cast
-				//double yFractal = (y - HEIGHT/2) * 2.0/HEIGHT; //scaling 
 
-				int iterations = frctl::Mandelbrot::get_iterations(coords.first, coords.second);
+				const int iterations = frctl::Mandelbrot::get_iterations(coords.first, coords.second);
 
 				fractal_[y * width_ + x] = iterations;
 
-				//elminate the maximum 
+				//Eliminate the maximum
 				if (iterations != frctl::Mandelbrot::MAX_ITERATIONS)
 				{
 					histogram_[iterations]++;
@@ -87,7 +85,7 @@ namespace frctl
 
 	void FractalCreator::_calculate_range_totals()
 	{
-		int rangeIndex = 0;
+		int range_index = 0;
 		#ifdef _OPENMP
 		omp_set_dynamic(0);
 		omp_set_num_threads(omp_get_num_procs());
@@ -97,12 +95,12 @@ namespace frctl
 		{
 			int pixels = histogram_[i];
 
-			if (i >= ranges_[rangeIndex + 1])
+			if (i >= ranges_[range_index + 1])
 			{
-				rangeIndex++;
+				range_index++;
 			}
 
-			range_totals[rangeIndex] += pixels;
+			range_totals[range_index] += pixels;
 		}
 	}
 
@@ -126,17 +124,16 @@ namespace frctl
 		{
 			for (int x = 0; x < width_; x++)
 			{
-
 				//color range
 				int iterations = fractal_[y * width_ + x];
 
 				int range = get_range(iterations);
-				int rangeTotal = range_totals[range];
-				int rangeStart = ranges_[range];
+				int range_total = range_totals[range];
+				int range_start = ranges_[range];
 
-				RGB& startColor = colors_[range];
-				RGB& endColor = colors_[range + 1]; //range is 0 based and range is 0 to 1 (hue)
-				RGB colorDiff = endColor - startColor;
+				RGB& start_color = colors_[range];
+				RGB& end_color = colors_[range + 1]; //range is 0 based and range is 0 to 1 (hue)
+				RGB color_diff = end_color - start_color;
 
 				uint8_t red = 0;
 				uint8_t green = 0;
@@ -145,24 +142,23 @@ namespace frctl
 				//Makes the image sharper
 				if (iterations != frctl::Mandelbrot::MAX_ITERATIONS)
 				{
-					int totalPixels = 0;
-					//double hue = 0.0; //range 0 to 1
-					for (int i = rangeStart; i <= iterations; i++)
+					int total_pixels = 0;
+
+					for (int i = range_start; i <= iterations; i++)
 					{
-						totalPixels += histogram_[i]; //histogram gives total pixels
+						total_pixels += histogram_[i]; //histogram gives total pixels
 					}
 
-					red = startColor.r + colorDiff.r * (double)totalPixels/rangeTotal;
-					green = startColor.g + colorDiff.g * (double)totalPixels/rangeTotal;
-					blue = startColor.b + colorDiff.b * (double)totalPixels/rangeTotal;
+					red = start_color.r + color_diff.r * (double)total_pixels / range_total;
+					green = start_color.g + color_diff.g * (double)total_pixels / range_total;
+					blue = start_color.b + color_diff.b * (double)total_pixels / range_total;
 
 				}
-				bitmap_.set_pixel(x, y, red, green, blue); // color-state for pixels
 
+				bitmap_.set_pixel(x, y, red, green, blue); // color-state for pixels
 			}
 		}
 	}
-
 
 	void FractalCreator::add_zoom(const frctl::Zoom& zoom)
 	{

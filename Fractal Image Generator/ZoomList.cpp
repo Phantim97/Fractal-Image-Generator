@@ -20,8 +20,8 @@ namespace frctl
 
 	std::pair<double, double> ZoomList::do_zoom(const int x, const int y)
 	{
-		double x_fractal = (x - width_ / 2.0) * scale_ + x_center_;
-		double y_fractal = (y - height_ / 2.0) * scale_ + y_center_;
+		double x_fractal = (x - width_ / 2) * scale_ + x_center_;
+		double y_fractal = (y - height_ / 2) * scale_ + y_center_;
 
 		return {x_fractal, y_fractal};
 	}

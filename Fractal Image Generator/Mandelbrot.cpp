@@ -13,7 +13,7 @@ namespace frctl
 
 		while (iterations < MAX_ITERATIONS)
 		{
-			z = z*z + c; //Mandelbrot algorithm
+			z = z * z + c; //Mandelbrot algorithm
 
 			if (abs(z) > 2) //catches numbers not in mandelbrot set (nums approaching infinity)
 			{

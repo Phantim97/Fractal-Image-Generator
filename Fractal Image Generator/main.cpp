@@ -8,18 +8,28 @@ int main()
 {
 	frctl::FractalCreator fractal_creator(800, 600);
 
-	int modeSelect = 0;
+#ifdef _WIN32
+	const std::string clear = "cls";
+#else
+	const std::string clear = "clear";
+#endif
+
+	constexpr int preset_mode = 1;
+	constexpr int test_mode = 2;
+
+	int mode_select = 0;
+
 	std::cout << "Select an option 1) Presets. 2) Test : ";
 	do
 	{
-		std::cin >> modeSelect;
-	} while (modeSelect != 1 && modeSelect != 2);
+		std::cin >> mode_select;
+	} while (mode_select != preset_mode && mode_select != test_mode);
 
-	if (modeSelect == 1)
+	if (mode_select == preset_mode)
 	{
 		preset_setup(fractal_creator, ZOOM_1, COLOR_1);
 	}
-	else if (modeSelect == 2)
+	else if (mode_select == test_mode)
 	{
 		std::cout << "Coloring Pixels...\n";
 
@@ -29,7 +39,7 @@ int main()
 		fractal_creator.add_range(0.3, frctl::RGB(137, 137, 0));
 		fractal_creator.add_range(1.0, frctl::RGB(255, 0, 0));
 
-		system("cls");
+		system(clear.c_str());
 		std::cout << "Zooming into correct coordinates...\n";
 
 		//add zooms_ to a point on the Fractal Image
@@ -45,14 +55,23 @@ int main()
 		fractal_creator.add_zoom(frctl::Zoom(452, 300, 0.1));
 	}
 
-	system("cls");
+	system(clear.c_str());
 	std::cout << "Rendering image...\n";
 
 	fractal_creator.run("test.bmp");
 
-	system("cls");
+	system(clear.c_str());
 	std::cout << "Finished.\n";
+#ifdef _WIN32
 	system("pause");
 	system("test.bmp");
+#elif __APPLE__
+	std::cin.get();
+	system("open test.bmp");
+#else
+	std::cin.get();
+	system("gimp test.bmp"); //GIMP dependency
+#endif
+
 	return 0;
 }
