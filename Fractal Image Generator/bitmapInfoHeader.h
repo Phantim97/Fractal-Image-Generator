@@ -2,9 +2,11 @@
 
 #include <cstdint>
 
-#pragma pack(2)
-namespace frctl {
-	struct BitmapInfoHeader {
+#pragma pack(push, 2)
+namespace frctl
+{
+	struct BitmapInfoHeader
+	{
 		int32_t headerSize{ 40 }; //size of struct in bytes
 		int32_t width;
 		int32_t height;
@@ -18,3 +20,5 @@ namespace frctl {
 		int32_t importantColors{ 0 }; //may not be used
 	};
 }
+
+#pragma pack(pop)
