@@ -23,6 +23,10 @@ int main()
 	do
 	{
 		std::cin >> mode_select;
+		if (mode_select != preset_mode && mode_select != test_mode)
+		{
+			std::cerr << "Invalid Input.\n";
+		}
 	} while (mode_select != preset_mode && mode_select != test_mode);
 
 	if (mode_select == preset_mode)
