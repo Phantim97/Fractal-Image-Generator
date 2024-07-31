@@ -1,10 +1,18 @@
 # Fractal-Image-Generator
-Uses the Mandelbrot Set Algorithm to generate a fractal image. Coordinates are obtained via GIMP and copying desired coordinates.
+<hr>
+Uses the Mandelbrot Set Algorithm to generate a fractal image. Coordinates are obtained via GIMP and copying desired coordinates. Supports all operating systems (Linux requires GIMP to open image)
+<hr>
 
-Features are limited in current state, planning to add:
-[X] Preset Menu 
-[ ] Multiple zoom/ color presets
-[ ] Manual input of rgb values and zoom features
-[ ] Manual adjustment of fractal image in runtime
-[ ] SSE Optimization
-[ ] CUDA Optimization
+## Sample:
+
+<img src="Fractal Image Generator/test.bmp"/>
+
+<hr>
+
+## Option 1 (Presets): 
+
+<img src="Fractal Image Generator/test_opt1.bmp">
+
+## Option 2 (Test):
+
+<img src="Fractal Image Generator/test_opt2.bmp">

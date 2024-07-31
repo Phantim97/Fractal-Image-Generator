@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BITMAP_H
+#define BITMAP_H
+
 #include <cstdint>
 #include <string>
 #include <memory>
@@ -8,15 +10,17 @@ namespace frctl
 	class Bitmap
 	{
 	private:
-		int m_width{ 0 };//C++11 allows for initializing private variables to a default value here
-		int m_height{ 0 };
-		std::unique_ptr<uint8_t[]> m_pPixels{ nullptr }; //uint8_t is alternative to unsigned char set to null also
+		int width_ = 0;
+		int height_ = 0;
+		std::unique_ptr<uint8_t[]> pixels_ =  nullptr ;
 
 	public:
 		Bitmap(int width, int height);
-		virtual ~Bitmap();
+		virtual ~Bitmap() = default;
 
-		bool write(std::string filename);
-		void setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t);
+		bool write(const std::string& filename);
+		void set_pixel(int x, int y, uint8_t red, uint8_t green, uint8_t);
 	};
 }
+
+#endif

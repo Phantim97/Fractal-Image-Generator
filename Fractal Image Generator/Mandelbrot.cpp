@@ -3,15 +3,8 @@
 
 namespace frctl
 {
-	Mandelbrot::Mandelbrot() {
-
-	}
-
-	Mandelbrot::~Mandelbrot()
-	{}
-
 	//Mandelbrot Algorithm here
-	int Mandelbrot::getIterations(double x, double y)
+	int Mandelbrot::get_iterations(const double x, const double y)
 	{
 		std::complex<double> z = 0;
 		std::complex<double> c(x, y); //passing in two numbers into this;
@@ -20,7 +13,7 @@ namespace frctl
 
 		while (iterations < MAX_ITERATIONS)
 		{
-			z = z*z + c; //Mandelbrot algorithm
+			z = z * z + c; //Mandelbrot algorithm
 
 			if (abs(z) > 2) //catches numbers not in mandelbrot set (nums approaching infinity)
 			{

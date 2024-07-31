@@ -2,7 +2,7 @@
 
 namespace frctl
 {
-	RGB::RGB(double r, double g, double b) : r(r), g(g), b(b)
+	RGB::RGB(const double r, const double g, const double b) : r(r), g(g), b(b)
 	{
 
 	}
